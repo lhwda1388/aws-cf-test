@@ -1,11 +1,13 @@
 variable "project" {
   description = "리소스 접두사"
   type        = string
-  default     = "edge-demo"
+  default     = "woo-cf-test"
 }
 
+
+
 variable "lambda_exec_role_arn" {
-  description = "Lambda 실행 역할 ARN (예: arn:aws:iam::<ACCOUNT_ID>:role/terraform/lambda-exec)"
+  description = "Lambda 실행 역할 ARN (예: arn:aws:iam::<ACCOUNT_ID>:role/lambda-exec)"
   type        = string
 }
 

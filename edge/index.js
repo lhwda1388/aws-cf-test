@@ -4,7 +4,7 @@ exports.handler = async (event, context, callback) => {
   const req = event.Records[0].cf.request;
 
   // 헤더 추가 예시
-  req.headers["x-edge-demo"] = [{ key: "x-edge-demo", value: "ok" }];
+  req.headers["x-custom-header"] = [{ key: "x-custom-header", value: "ok" }];
 
   return callback(null, req);
 };
