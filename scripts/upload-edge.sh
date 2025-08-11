@@ -2,27 +2,28 @@
 
 
 
+PROJECT_NAME=$1
+AWS_PROFILE=$2
+
+export AWS_PROFILE=$AWS_PROFILE
+
+FUNCTION_NAME=$PROJECT_NAME-edge
+
 # edge 폴더의 파일들을 zip으로 압축
-cd edge && zip -r ../edge.zip .
-
-FUNCTION_NAME=$1
-
-# 테라폼 output에서 필요한 정보 가져오기
-cd ../tf
-LAMBDA_ARN=$(aws lambda list-functions --region us-east-1 --query "Functions[?FunctionName=='${FUNCTION_NAME}'].FunctionArn" --output text)
+chmod +x ./scripts/package.sh
+./scripts/package.sh
 
 # Lambda 함수 업데이트
-cd ..
 aws lambda update-function-code \
   --region us-east-1 \
-  --function-name $(echo $LAMBDA_ARN | cut -d: -f7) \
+  --function-name $FUNCTION_NAME \
   --zip-file fileb://edge.zip \
   --publish
 
 # 새 버전의 ARN 가져오기
 NEW_VERSION_ARN=$(aws lambda list-function-versions \
   --region us-east-1 \
-  --function-name $(echo $LAMBDA_ARN | cut -d: -f7) \
+  --function-name $FUNCTION_NAME \
   --query 'Versions[-1].FunctionArn' \
   --output text)
 
@@ -42,8 +43,6 @@ aws cloudfront update-distribution \
 
 # 임시 파일 삭제
 rm dist-config.json dist-config-new.json
-
-
 
 # 압축 파일 삭제
 rm edge.zip
