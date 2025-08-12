@@ -1,9 +1,1 @@
-const version = "1.0.0";
-
-window.testSdk = () => {
-  const test = () => {
-    console.log("version", version);
-  };
-
-  test();
-};
+(function(e,n){typeof exports=="object"&&typeof module<"u"?n(exports):typeof define=="function"&&define.amd?define(["exports"],n):(e=typeof globalThis<"u"?globalThis:e||self,n(e.GripCloudShortformSDK={}))})(this,function(e){"use strict";const n=o=>{const t={apiKey:o?.apiKey||void 0,baseUrl:o?.baseUrl||"https://api-dev.gripcloud.com",debug:o?.debug||!0};return{init:()=>{console.log("SDK initialized",t),console.log("Environment:","dev")},load:()=>{console.log("SDK loaded"),console.log("API URL:",t.baseUrl)}}},i="1.0.0";e.SDK_ENV="dev",e.SDK_VERSION=i,e.createSDKInstance=n,Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

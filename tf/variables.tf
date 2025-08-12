@@ -1,7 +1,7 @@
 variable "project" {
   description = "리소스 접두사"
   type        = string
-  default     = "woo-cf-test"
+  default     = "woo-cf-test2"
 }
 
 
